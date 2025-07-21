@@ -1,7 +1,10 @@
 import TotalDisplay from "./components/TotalDisplay.jsx";
 import CalcButton from "./components/CalcButton.jsx";
+import { useReducer } from "react";
+import { initialState, reducer } from "./store/reducers.jsx";
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <div>
       <nav className="text-center py-6 px-4 bg-stone-800 text-white text-xl/none">
@@ -10,13 +13,14 @@ function App() {
 
       <div className="mt-12 mx-auto w-75">
         <form name="Cal">
-          <TotalDisplay value={"X"} />
+          <TotalDisplay value={state.total} />
           <div className="flex justify-between bg-black text-white text-sm px-3 py-2">
             <span id="operation">
-              <b>Operation:</b> X
+              <b>Operation: </b>
+              {state.operation}
             </span>
             <span id="memory">
-              <b>Memory:</b> X
+              <b>Memory:</b> {state.memory}
             </span>
           </div>
           <div className="flex">
